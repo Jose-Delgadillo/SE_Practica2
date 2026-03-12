@@ -5,17 +5,18 @@ import os
 # Nombre del archivo que servirá como nuestra Base de Datos
 ARCHIVO_BD = 'base_conocimiento.json'
 
-# Las 3 líneas precargadas (Conocimiento inicial)
+# Las líneas precargadas (Conocimiento inicial)
 DATOS_INICIALES = {
     "hola": "¡Hola! ¿Cómo estás?",
     "como estas": "Muy bien, gracias por preguntar. ¿De qué te gustaría hablar?",
-    "adios": "¡Hasta luego! Vuelve pronto."
+    "adios": "¡Hasta luego! Vuelve pronto.",
+    "como te llamas": "Me llamo Chappie. ¡Soy un bot en entrenamiento!"
 }
 
-class ChatBotAprendizaje:
+class ChappieBot:
     def __init__(self, root):
         self.root = root
-        self.root.title("Módulo de Adquisición de Conocimiento")
+        self.root.title("Chappie - Módulo de Adquisición de Conocimiento")
         self.root.geometry("450x550")
         self.root.configure(bg="#E5E7E9")
         
@@ -27,7 +28,7 @@ class ChatBotAprendizaje:
         self.conocimiento = self.cargar_conocimiento()
 
         self.crear_interfaz()
-        self.mostrar_mensaje("🤖 Bot", "¡Hola! Soy un sistema de aprendizaje. Escribe algo para comenzar.")
+        self.mostrar_mensaje("🤖 Chappie", "¡Hola! Soy Chappie. Escribe algo para comenzar.")
 
     def crear_interfaz(self):
         # Pantalla de chat
@@ -87,21 +88,21 @@ class ChatBotAprendizaje:
             self.guardar_conocimiento()
             
             # 2. Confirma y resetea el estado
-            self.mostrar_mensaje("🤖 Bot", "¡Excelente! He guardado esa información en mi base de datos. Ya lo sé para la próxima vez.")
+            self.mostrar_mensaje("🤖 Chappie", "¡Excelente! He guardado esa información en mi base de datos. Ya lo sé para la próxima vez.")
             self.modo_aprendizaje = False
             self.pregunta_pendiente = ""
             
         else:
             # Flujo normal: Buscar la pregunta en la base de datos
             if texto_limpio in self.conocimiento:
-                self.mostrar_mensaje("🤖 Bot", self.conocimiento[texto_limpio])
+                self.mostrar_mensaje("🤖 Chappie", self.conocimiento[texto_limpio])
             else:
                 # No encontró la respuesta, entra en Modo Aprendizaje
-                self.mostrar_mensaje("🤖 Bot", "No tengo esa información en mi base de datos. ¿Qué debería responder cuando me digan eso?")
+                self.mostrar_mensaje("🤖 Chappie", "No tengo esa información en mi base de datos. ¿Qué debería responder cuando me digan eso?")
                 self.modo_aprendizaje = True
                 self.pregunta_pendiente = texto_limpio
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ChatBotAprendizaje(root)
+    app = ChappieBot(root)
     root.mainloop()
